@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 40px;
     margin-bottom: 40px;
     color: #623EED;
     font-weight: 700;
@@ -81,7 +81,7 @@ textarea:focus {
 }
 
 .action-button {
-    background-color: #2196f3;
+    background-color: #2FA2B4;
 }
 
 .action-button:hover {
@@ -91,7 +91,7 @@ textarea:focus {
 }
 
 .copy-button {
-    background-color: #4caf50;
+    background-color: #3AEF8D;
 }
 
 .copy-button:hover {
