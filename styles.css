@@ -1,6 +1,6 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
+    font-family: 'Times new Roma', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #3E52ED, #94D9EF);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ body {
 h1 {
     font-size: 36px;
     margin-bottom: 40px;
-    color: #3b3b3b;
+    color: #623EED;
     font-weight: 700;
 }
 
