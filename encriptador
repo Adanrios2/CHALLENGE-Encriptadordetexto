@@ -1,0 +1,137 @@
+#ifndef CLIENTE_H
+#define CLIENTE_H
+
+#include <iostream>
+#include <string>
+
+class Cliente {
+private:
+    int idCliente;
+    std::string nombre;
+public:
+    Cliente();
+    Cliente(int id, std::string nom);
+    void display() const;
+};
+
+#endif // CLIENTE_H
+
+
+#include "Cliente.h"
+
+Cliente::Cliente() : idCliente(0), nombre("") {}
+
+Cliente::Cliente(int id, std::string nom) : idCliente(id), nombre(nom) {}
+
+void Cliente::display() const {
+    std::cout << "Cliente: " << nombre << " con id: " << idCliente << std::endl;
+}
+
+#ifndef PLATILLO_H
+#define PLATILLO_H
+
+#include <iostream>
+#include <string>
+
+class Platillo {
+protected:
+    std::string nombre;
+    double precio;
+public:
+    Platillo(std::string nom, double precio);
+    virtual double getPrecio() const;
+    virtual void display() const;
+};
+
+#endif // PLATILLO_H
+
+#include "Platillo.h"
+
+Platillo::Platillo(std::string nom, double precio) : nombre(nom), precio(precio) {}
+
+double Platillo::getPrecio() const {
+    return precio;
+}
+
+void Platillo::display() const {
+    std::cout << nombre << " y cuesta: " << precio << " pesos" << std::endl;
+}
+
+#ifndef PEDIDO_H
+#define PEDIDO_H
+
+#include <iostream>
+#include <vector>
+#include "Cliente.h"
+#include "Platillo.h"
+
+class Pedido {
+private:
+    int idPedido;
+    Cliente miCliente;
+    std::vector<Platillo*> platillos;
+public:
+    Pedido(int id, Cliente cli);
+    void agregarPlatillo(Platillo* p);
+    double getTotal() const;
+    void display() const;
+};
+
+#endif // PEDIDO_H
+
+#include "Pedido.h"
+
+Pedido::Pedido(int id, Cliente cli) : idPedido(id), miCliente(cli) {}
+
+void Pedido::agregarPlatillo(Platillo* p) {
+    platillos.push_back(p);
+}
+
+double Pedido::getTotal() const {
+    double total = 0;
+    for (const auto& platillo : platillos) {
+        total += platillo->getPrecio();
+    }
+    return total;
+}
+
+void Pedido::display() const {
+    miCliente.display();
+    std::cout << "Información del Pedido número " << idPedido << std::endl;
+    int index = 1;
+    for (const auto& platillo : platillos) {
+        std::cout << index++ << ": ";
+        platillo->display();
+    }
+    std::cout << "El costo total de tu orden es: " << getTotal() << " pesos" << std::endl;
+}
+
+#include <iostream>
+#include "Cliente.h"
+#include "Platillo.h"
+#include "Pedido.h"
+
+int main() {
+    Cliente cliente(101, "El Paisa");
+
+    Platillo platillo1("Hamburguesa sencilla", 100);
+    Platillo platillo2("Hamburguesa doble", 115);
+    Platillo platillo3("Hamburguesa triple", 130);
+    Platillo platillo4("Segundo Platillo", 120);
+    Platillo platillo5("Segundo Platillo (b)", 144);
+    Platillo platillo6("Tercer Platillo", 105);
+    Platillo platillo7("Tercer Platillo (b)", 70);
+
+    Pedido pedido(563, cliente);
+    pedido.agregarPlatillo(&platillo1);
+    pedido.agregarPlatillo(&platillo2);
+    pedido.agregarPlatillo(&platillo3);
+    pedido.agregarPlatillo(&platillo4);
+    pedido.agregarPlatillo(&platillo5);
+    pedido.agregarPlatillo(&platillo6);
+    pedido.agregarPlatillo(&platillo7);
+
+    pedido.display();
+
+    return 0;
+}
